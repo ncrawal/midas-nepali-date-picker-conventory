@@ -2,6 +2,15 @@
   "name": "midas-nepali-date-picker-conventory",
   "version": "1.0.0",
   "description": "Lightweight, high-performance Nepali Bikram Sambat (BS) <-> Gregorian (AD) date converter, NepaliDate utility library, and Ant Design BS/AD Dual DatePicker with runtime-extensible BS calendar years.",
+  "author": "ncrawal",
+  "homepage": "https://github.com/ncrawal/midas-nepali-date-picker-conventory#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ncrawal/midas-nepali-date-picker-conventory.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ncrawal/midas-nepali-date-picker-conventory/issues"
+  },
   "keywords": [
     "nepali-date",
     "bikram-sambat",
