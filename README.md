@@ -1,5 +1,10 @@
 # midas-nepali-date-picker-conventory
 
+[![npm version](https://img.shields.io/npm/v/midas-nepali-date-picker-conventory.svg?style=flat-square)](https://www.npmjs.com/package/midas-nepali-date-picker-conventory)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![npm downloads](https://img.shields.io/npm/dm/midas-nepali-date-picker-conventory.svg?style=flat-square)](https://www.npmjs.com/package/midas-nepali-date-picker-conventory)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?style=flat-square)](https://www.typescriptlang.org/)
+
 A lightweight, high-performance, all-in-one **Nepali Bikram Sambat (BS) ↔ Gregorian (AD) Date Converter**, **`NepaliDate` utility library**, and **Ant Design BS/AD Dual DatePicker & RangePicker** with **runtime-extensible future BS calendar years** and **complete CSS/design customization**.
 
 Works seamlessly across **Vite, Next.js (App & Pages Router / SSR), Create React App, Webpack, Rollup, TypeScript, and plain JavaScript** projects right after `npm install` or `yarn add`.
@@ -30,6 +35,23 @@ yarn add midas-nepali-date-picker-conventory
 
 > **Peer Dependencies** (for React / Ant Design DatePicker components):
 > `react >= 17`, `react-dom >= 17`, `antd >= 5`, `dayjs >= 1.10`
+
+---
+
+## 🖥️ Live Example App
+
+This repository includes a pre-configured interactive demo with 3 real-world scenarios:
+
+```bash
+cd example
+npm install
+npm run dev
+```
+
+Visit `http://localhost:5173` to explore:
+1. **Dual BS/AD Form Registration** (Patient Admission with Devanagari numerals).
+2. **Nepali Date Range Filter** (Hospital billing & financial report filtering).
+3. **Date Converter Playground** (Instant two-way BS ↔ AD conversion and runtime calendar year extension).
 
 ---
 
