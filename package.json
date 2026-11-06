@@ -1,0 +1,119 @@
+{
+  "name": "midas-nepali-date-picker-conventory",
+  "version": "1.0.0",
+  "description": "Lightweight, high-performance Nepali Bikram Sambat (BS) <-> Gregorian (AD) date converter, NepaliDate utility library, and Ant Design BS/AD Dual DatePicker with runtime-extensible BS calendar years.",
+  "keywords": [
+    "nepali-date",
+    "bikram-sambat",
+    "bs-to-ad",
+    "ad-to-bs",
+    "nepali-datepicker",
+    "nepali-calendar",
+    "antd-nepali-datepicker",
+    "nepali-date-converter",
+    "devanagari",
+    "hmis",
+    "midas",
+    "react",
+    "antd"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/esm/index.d.ts"
+      ],
+      "date-utils": [
+        "./dist/esm/date-utils/index.d.ts"
+      ],
+      "picker": [
+        "./dist/esm/picker/index.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./date-utils": {
+      "import": {
+        "types": "./dist/esm/date-utils/index.d.ts",
+        "default": "./dist/esm/date-utils/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/date-utils/index.d.ts",
+        "default": "./dist/cjs/date-utils/index.js"
+      }
+    },
+    "./picker": {
+      "import": {
+        "types": "./dist/esm/picker/index.d.ts",
+        "default": "./dist/esm/picker/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/picker/index.d.ts",
+        "default": "./dist/cjs/picker/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && node scripts/fix-cjs-package.mjs",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "test": "node --test tests/*.test.mjs",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "peerDependencies": {
+    "antd": ">=5.0.0",
+    "dayjs": ">=1.10.0",
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "antd": {
+      "optional": true
+    },
+    "dayjs": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "antd": "^5.18.3",
+    "dayjs": "^1.11.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.3"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
+
