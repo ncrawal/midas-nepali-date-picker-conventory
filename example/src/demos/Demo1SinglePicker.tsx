@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Form, Input, Button, Switch, Alert, Tag, Space, Divider, message } from "antd";
 import { NewNepaliDatePicker } from "midas-nepali-date-picker-conventory/picker";
-import { NepaliDate, adToBs, bsToAd } from "midas-nepali-date-picker-conventory";
+import { NepaliDate, bsToAdString, parseNepaliDate } from "midas-nepali-date-picker-conventory";
 import type { NepaliDateChangeExtra } from "midas-nepali-date-picker-conventory/picker";
 
 export const Demo1SinglePicker: React.FC = () => {
@@ -21,8 +21,8 @@ export const Demo1SinglePicker: React.FC = () => {
     console.log("Form submitted values:", values, "Selected BS:", selectedBs);
   };
 
-  const adDateEquivalent = selectedBs ? bsToAd(selectedBs) : "";
-  const nepaliDateObj = selectedBs ? new NepaliDate(selectedBs) : null;
+  const adDateEquivalent = selectedBs ? (bsToAdString(selectedBs) || "") : "";
+  const nepaliDateObj = selectedBs ? parseNepaliDate(selectedBs) : null;
 
   return (
     <Card
@@ -108,3 +108,4 @@ export const Demo1SinglePicker: React.FC = () => {
     </Card>
   );
 };
+

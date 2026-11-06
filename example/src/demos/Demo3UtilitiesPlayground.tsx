@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Card, Input, Button, Tag, Space, Alert, Typography, Row, Col, message } from "antd";
 import {
   NepaliDate,
-  adToBs,
-  bsToAd,
+  adToBsString,
+  bsToAdString,
+  parseNepaliDate,
   getSupportedBsYearRange,
   registerBsYear,
   getTodayBs,
@@ -13,17 +14,30 @@ const { Text, Title } = Typography;
 
 export const Demo3UtilitiesPlayground: React.FC = () => {
   const [inputAd, setInputAd] = useState<string>("2026-11-06");
-  const [convertedBs, setConvertedBs] = useState<string>(() => adToBs("2026-11-06"));
+  const [convertedBs, setConvertedBs] = useState<string>(() => {
+    const d = new Date(2026, 10, 6);
+    return adToBsString(d) || "2083-07-21";
+  });
 
   const [inputBs, setInputBs] = useState<string>("2083-07-21");
-  const [convertedAd, setConvertedAd] = useState<string>(() => bsToAd("2083-07-21"));
+  const [convertedAd, setConvertedAd] = useState<string>(() => bsToAdString("2083-07-21") || "2026-11-06");
 
   const [calendarRange, setCalendarRange] = useState<[number, number]>(() => getSupportedBsYearRange());
   const [extendedYearRegistered, setExtendedYearRegistered] = useState<boolean>(false);
 
   const handleConvertAdToBs = () => {
     try {
-      const bs = adToBs(inputAd);
+      const parts = inputAd.split("-").map(Number);
+      if (parts.length !== 3 || parts.some(isNaN)) {
+        message.error("Please enter a valid AD date (YYYY-MM-DD)");
+        return;
+      }
+      const jsDate = new Date(parts[0], parts[1] - 1, parts[2]);
+      const bs = adToBsString(jsDate);
+      if (!bs) {
+        message.error("AD date is out of supported Nepali calendar range");
+        return;
+      }
       setConvertedBs(bs);
       message.success(`Converted ${inputAd} AD -> ${bs} BS`);
     } catch (e: any) {
@@ -33,7 +47,11 @@ export const Demo3UtilitiesPlayground: React.FC = () => {
 
   const handleConvertBsToAd = () => {
     try {
-      const ad = bsToAd(inputBs);
+      const ad = bsToAdString(inputBs);
+      if (!ad) {
+        message.error("Invalid BS date or out of supported range (1970–2099)");
+        return;
+      }
       setConvertedAd(ad);
       message.success(`Converted ${inputBs} BS -> ${ad} AD`);
     } catch (e: any) {
@@ -55,6 +73,8 @@ export const Demo3UtilitiesPlayground: React.FC = () => {
 
   const todayBs = getTodayBs();
   const nepaliDateNow = new NepaliDate();
+  const convertedBsObj = parseNepaliDate(convertedBs);
+  const inputBsObj = parseNepaliDate(inputBs);
 
   return (
     <Card
@@ -95,7 +115,7 @@ export const Demo3UtilitiesPlayground: React.FC = () => {
                     <div>
                       <span>Devanagari Format: </span>
                       <Tag color="magenta">
-                        {new NepaliDate(convertedBs).format("YYYY MMMM DD, dddd", "np")}
+                        {convertedBsObj ? convertedBsObj.format("YYYY MMMM DD, dddd", "np") : convertedBs}
                       </Tag>
                     </div>
                   }
@@ -129,7 +149,7 @@ export const Demo3UtilitiesPlayground: React.FC = () => {
                       AD Equivalent: <strong>{convertedAd}</strong>
                     </span>
                   }
-                  description={`Parsed Day of week: ${new NepaliDate(inputBs).format("dddd")}`}
+                  description={inputBsObj ? `Parsed Day of week: ${inputBsObj.format("dddd")}` : undefined}
                   style={{ marginTop: 8 }}
                 />
               )}
@@ -167,3 +187,4 @@ export const Demo3UtilitiesPlayground: React.FC = () => {
     </Card>
   );
 };
+

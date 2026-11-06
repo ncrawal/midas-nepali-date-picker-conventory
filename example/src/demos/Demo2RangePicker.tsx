@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Table, Tag, Space, Button, Statistic, Row, Col, Badge } from "antd";
 import { NewNepaliRangePicker } from "midas-nepali-date-picker-conventory/picker";
-import { NepaliDate, daysBetween } from "midas-nepali-date-picker-conventory";
+import { NepaliDate, daysBetween, parseNepaliDate } from "midas-nepali-date-picker-conventory";
 import type { NepaliRangeChangeExtra } from "midas-nepali-date-picker-conventory/picker";
 
 interface BillingRecord {
@@ -39,7 +39,9 @@ export const Demo2RangePicker: React.FC = () => {
     }
   };
 
-  const dayCount = rangeBs[0] && rangeBs[1] ? Math.max(0, daysBetween(rangeBs[0], rangeBs[1]) + 1) : 0;
+  const dateA = rangeBs[0] ? parseNepaliDate(rangeBs[0]) : null;
+  const dateB = rangeBs[1] ? parseNepaliDate(rangeBs[1]) : null;
+  const dayCount = dateA && dateB ? Math.max(0, daysBetween(dateA, dateB) + 1) : 0;
   const totalRevenue = filteredData.reduce((acc, cur) => acc + (cur.status === "Paid" ? cur.amount : 0), 0);
 
   const columns = [
@@ -130,3 +132,4 @@ export const Demo2RangePicker: React.FC = () => {
     </Card>
   );
 };
+
